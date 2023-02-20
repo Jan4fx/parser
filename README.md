@@ -4,6 +4,7 @@ I created a Racket Lisp Top Down Scanner and Parser to syntactically check some 
 will show token stream
 >(parse "file01.txt") 
 will parse input file 1
+
 Expected Outputs when running the parse function
 File 1: Correct
 File 2: Unknown operator; should get scan error on line 30.
