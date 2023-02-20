@@ -1,8 +1,12 @@
 Parser and Scanner to run Syntax Checks on BASIC
 I created a Racket Lisp Top Down Scanner and Parser to syntactically check some BASIC coded input files
+
 >tokens 
+
 will show token stream
+
 >(parse "file01.txt") 
+
 will parse input file 1
 
 Expected Outputs when running the parse function
