@@ -3,9 +3,9 @@ I created a Racket Lisp Top Down Scanner and Parser to syntactically check some 
 
 >tokens 
 
-will show token stream
+will show token stream of "file03.txt" this is a hardcoded way to easily test the scanner over and over again
 
->(parse "file01.txt") 
+>(parse "file1.txt") 
 
 will parse input file 1
 
