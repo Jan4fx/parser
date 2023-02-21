@@ -3,6 +3,8 @@
 (require parser-tools/lex)
 (require parser-tools/lex-sre)
 
+;(let ([linenumber 500]) 500)
+
 (define tokenizer
   (lexer
    [(eof) '()]
@@ -84,11 +86,17 @@
    [whitespace (tokenizer input-port)]
    ))
 
+;Keep track of line number
+;Currently it displays 'INT instead of the actual line number
+;Need new tokenizer that keeps track of only ints and when get to new int pop old int set! new int to linenumber?
+(define linenumber -1) 
+
 ;Program
+
 (define (program tokens)
     (cond
       ;every line has to start with linenumber or EOF symbol
-      [(equal? (first tokens)`INT) (stmt_list (rest tokens))]
+      [(equal? (first tokens)`INT) (set! linenumber (first tokens)) (stmt_list (rest tokens))]
       [(equal? (first tokens)`newline) (program (rest tokens))]
       [(equal? (first tokens)`$$) (print"accept")]
       [else (error"Syntax Error: Expected Line Number or EOF; Instead got:" (first tokens))]))
@@ -199,6 +207,7 @@
 
 (define (stmt_list tokens)
     (cond
+      
       [(equal? (first tokens)`read) (readidx (rest tokens))]
       [(equal? (first tokens)`write) (readidx (rest tokens))]
       [(equal? (first tokens)`goto) (goidx (rest tokens))]
