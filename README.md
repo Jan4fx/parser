@@ -16,6 +16,7 @@ File 4: Syntax error (repeated operator) on line 30.
    The misspelled identifier in line 40 is NOT a syntax error. 
 File 5: Syntax error (no line number)
 File 6: Correct 
+File 7: Correct (at least, syntactically) 
 
 Provided Grammar 
 program -> linelist $$ 
