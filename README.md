@@ -1,5 +1,4 @@
-Parser and Scanner to run Syntax Checks on BASIC
-I created a Racket Lisp Top Down Scanner and Parser to syntactically check some BASIC coded input files
+Racket Lisp Top Down Parser and Scanner to run Syntax Checks on BASIC input files
 
 >tokens 
 
