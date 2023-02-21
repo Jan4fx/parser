@@ -8,7 +8,7 @@ will show token stream of "file03.txt" this is a hardcoded way to easily test th
 
 will parse input file 1
 
-Expected Outputs when running the parse function
+Expected outputs when running the parse function
 File 1: Correct
 File 2: Unknown operator; should get scan error on line 30.
 File 3: Correct (at least, syntactically) 
@@ -34,4 +34,4 @@ digit -> 0 | nonzero_digit
 
 I plugged the provided grammar into http://hackingoff.com/compilers/predict-first-follow-set to create all of my needed first follow and predict sets
 
-Used racket documentation to help me learn the basic fundamentals
+Used racket documentation to help me learn the fundamentals
