@@ -103,7 +103,8 @@
 (define (gotail tokens)
     (cond
     [(equal? (first tokens)`newline) (program (rest tokens))]
-    [else (error"Syntax Error: Expected newline; Instead got:" (first tokens))]))
+    [(equal? (first tokens)`if) (ifstmt (rest tokens))]
+    [else (error"Syntax Error: Expected newline or if stmt; Instead got:" (first tokens))]))
 
 (define (readidx tokens)
     (cond
