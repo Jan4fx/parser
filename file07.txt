@@ -1,0 +1,10 @@
+10 read A 
+20 read B
+30 gosub 400 
+40 if C = ( 400 + 200 ) then write C 
+50 if C = 0 then goto 1000 
+400 C = A + B : return 
+
+450 A = 3
+500 if A = 1 + 2 then C = 4 if A = 4 then C = 5
+$$
