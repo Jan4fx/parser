@@ -94,7 +94,7 @@
 (define (program tokens)
     (cond
       ;every line has to start with linenumber newline or EOF symbol
-      [(exact-nonnegative-integer?(first tokens)) (set! linenumber (first tokens)) (stmt_list (rest tokens))]
+      [(exact-nonnegative-integer?(first tokens)) (set! linenumber (first tokens)) (stmtlist (rest tokens))]
       [(equal? (first tokens)`newline) (program (rest tokens))]
       [(equal? (first tokens)`$$) (print"accept")]
       [else (error"Syntax Error on Line " linenumber ": Expected Line Number/Newline or EOF; Instead got:" (first tokens))]))
@@ -164,7 +164,7 @@
     [(equal? (first tokens)'+) (ifstmttail (rest tokens))]
     [(equal? (first tokens)'-) (ifstmttail (rest tokens))]
     [(equal? (first tokens)'=) (ifstmttail (rest tokens))]
-    [(equal? (first tokens)'then) (stmt_list (rest tokens))]
+    [(equal? (first tokens)'then) (stmtlist (rest tokens))]
     [else (error"Syntax Error On Line" linenumber "Expected op; Instead got:" (first tokens))]))
 
 (define (ifstmttail tokens)
@@ -190,10 +190,10 @@
 
 (define (thenstmt tokens)
     (cond
-    [(equal? (first tokens)'then) (stmt_list (rest tokens))]
+    [(equal? (first tokens)'then) (stmtlist (rest tokens))]
     [else (error"Syntax Error On Line" linenumber "Expected then statement; Instead got:" (tokens))]))
 
-(define (stmt_list tokens)
+(define (stmtlist tokens)
     (cond
       [(equal? (first tokens)`read) (readidx (rest tokens))]
       [(equal? (first tokens)`write) (readidx (rest tokens))]
@@ -204,7 +204,7 @@
       [else (error "Syntax Error On Line" linenumber " Expected stmt; Instead got:" (first tokens))]))
 
 
-(define tokens(tokenizer(open-input-file "file03.txt"))) ;test token stream
+(define tokens(tokenizer(open-input-file "file01.txt"))) ;test token stream
 
 ;calls the parser after calling the scanner
 (define (parse input-file)
