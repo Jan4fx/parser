@@ -75,20 +75,11 @@
         (cons `$$
               (tokenizer input-port))]
    
-   ;(exact-positive-integer? 1)
-   ;0200 cannot be a line number
-   ;keep track of 0 and negative numbers
-   
    [(:: (:? #\-)(:+ (char-range #\0 #\9)))
         (cons (string->number lexeme)
              (tokenizer input-port))]
 
    [(:+ numeric) (string->number lexeme)]
-
-   ;[(:: (:? #\-)(:+ (char-range #\0 #\9)))
-    ;(cond
-     ; [(exact-positive-integer? #t (cons `INT (tokenizer input-port)))]
-      ;[(exact-positive-integer? #f (cons 'NONPOSITIVEINT (tokenizer input-port)))])]
 
    [whitespace (tokenizer input-port)]
    ))
@@ -102,11 +93,11 @@
 ;Starts the parse and every subsequent line
 (define (program tokens)
     (cond
-      ;every line has to start with linenumber or EOF symbol
-      [(number?(first tokens)) (set! linenumber (first tokens)) (stmt_list (rest tokens))]
+      ;every line has to start with linenumber newline or EOF symbol
+      [(exact-nonnegative-integer?(first tokens)) (set! linenumber (first tokens)) (stmt_list (rest tokens))]
       [(equal? (first tokens)`newline) (program (rest tokens))]
       [(equal? (first tokens)`$$) (print"accept")]
-      [else (error"Syntax Error on line " linenumber ": Expected Line Number or EOF; Instead got:" (first tokens))]))
+      [else (error"Syntax Error on Line " linenumber ": Expected Line Number/Newline or EOF; Instead got:" (first tokens))]))
 
 
 (define (goidx tokens)
@@ -199,13 +190,11 @@
 
 (define (thenstmt tokens)
     (cond
-    [(equal? (first tokens)'newline) (thenstmt (rest tokens))]
     [(equal? (first tokens)'then) (stmt_list (rest tokens))]
     [else (error"Syntax Error On Line" linenumber "Expected then statement; Instead got:" (tokens))]))
 
 (define (stmt_list tokens)
     (cond
-      
       [(equal? (first tokens)`read) (readidx (rest tokens))]
       [(equal? (first tokens)`write) (readidx (rest tokens))]
       [(equal? (first tokens)`goto) (goidx (rest tokens))]
@@ -215,7 +204,7 @@
       [else (error "Syntax Error On Line" linenumber " Expected stmt; Instead got:" (first tokens))]))
 
 
-(define tokens(tokenizer(open-input-file "file01.txt"))) ;test token stream
+(define tokens(tokenizer(open-input-file "file03.txt"))) ;test token stream
 
 ;calls the parser after calling the scanner
 (define (parse input-file)
